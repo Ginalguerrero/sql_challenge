@@ -1,0 +1,80 @@
+const inquirer = require("inquirer");
+
+async function getOperation() {
+  try {
+    const { action } = await inquirer.prompt({
+      type: "list",
+      name: "action",
+      message: "What do you wish to do?",
+      choices: [
+        "View departments",
+        "View roles",
+        "View employees",
+        "Add department",
+        "Add role",
+        "Add employee",
+        "Update employee role"
+      ]
+    });
+
+    const index = choices.findIndex(action);
+    switch (index) {
+      case 0:
+        displayDepartments();
+        break;
+      case 1:
+        displayRoles();
+        break;
+      case 2:
+        displayEmployees();
+        break;
+      case 3:
+        addDepartment();
+        break;
+      case 4:
+        addRole();
+        break;
+      case 5:
+        addEmployee();
+        break;
+      case 6:
+        editEmployeeRole();
+        break;
+      default:
+        console.log("Invalid");
+        getOperation();
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+function displayDepartments() {
+  console.log("Not IMPLEMENTED");
+}
+
+
+function displayRoles() {
+  console.log("Not IMPLEMENTED");
+}
+
+function displayEmployees() {
+  console.log("Not IMPLEMENTED");
+}
+
+function addDepartment() {
+  console.log("Not IMPLEMENTED");
+}
+
+function addRole() {
+  console.log("Not IMPLEMENTED");
+}
+
+function addEmployee() {
+  console.log("Not IMPLEMENTED");
+}
+
+function editEmployeeRole() {
+  console.log("Not IMPLEMENTED");
+}
+getOperation();
