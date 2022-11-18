@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Ginalguerrero/sql_challenge#readme",
   "dependencies": {
+    "chalk": "^4.1.2",
     "inquirer": "^6.3.1",
     "mysql2": "^2.3.3"
   }

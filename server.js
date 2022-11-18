@@ -1,4 +1,6 @@
 const inquirer = require("inquirer");
+const chalk = require("chalk");
+
 
 async function getOperation() {
   try {
@@ -13,8 +15,8 @@ async function getOperation() {
         "Add department",
         "Add role",
         "Add employee",
-        "Update employee role"
-      ]
+        "Update employee role",
+      ],
     });
 
     const index = choices.findIndex(action);
@@ -49,10 +51,25 @@ async function getOperation() {
   }
 }
 
+
+async function menu() {
+  const {category} = await inquirer.prompt([{
+    name: "",
+    message: "Select a category:",
+    choices = ['Department', 'Role', 'Employee', 'Quit']
+}])
+  operations[category]()
+}
+
+console.log(chalk.magenta("EMPLOYEE TRACKER")
+
+
+
+
+
 function displayDepartments() {
   console.log("Not IMPLEMENTED");
 }
-
 
 function displayRoles() {
   console.log("Not IMPLEMENTED");
