@@ -1,5 +1,8 @@
 const mysql = require("mysql2");
+const cTable = require('console.table');
 require("dotenv").config();
+const chalk = require("chalk");
+
 
 const queries = require("./queries.js");
 class QueryDB {
@@ -19,25 +22,31 @@ class QueryDB {
 
   async queryAllDepartments() {
     const [rows] = await this.connection.query(queries.allDepartments);
-    return rows;
+    console.log(chalk.bgBlue("---ALL DEPARTMENTS---"));
+    console.table(rows);
   }
 
   async queryAllRoles() {
     const [rows] = await this.connection.query(queries.allRoles);
-    return rows;
+    console.log(chalk.bgBlue("---ALL ROLES---"));
+
+    console.table(rows);
   }
 
   async queryAllEmployees() {
     const [rows] = await this.connection.query(queries.allEmployees);
-    return rows;
+    console.log(chalk.bgBlue("---ALL EMPLOYEES---"));
+    console.table(rows);
   }
 
   async addToDB(key, data) {
-    await this.connection.query(queries[key], data);
+    await this.connection.query(queries[`add${key}`], data);
+    console.log(chalk.bgGreen(`Added ${key} successfully!`))
   }
 
   async updateEmployeeRole(data) {
     await this.connection.query(queries.updateEmployeeRole, data);
+    console.log(chalk.bgGreen('Updated employee role successfully!'));
   }
 }
 
