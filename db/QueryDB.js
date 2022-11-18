@@ -1,10 +1,11 @@
 const mysql = require("mysql2");
 const cTable = require('console.table');
 require("dotenv").config();
+
+
 const chalk = require("chalk");
+const queries = require("./queries");
 
-
-const queries = require("./queries.js");
 class QueryDB {
   constructor() {
     this.connection = mysql
@@ -18,10 +19,14 @@ class QueryDB {
         console.log("Connected!")
       )
       .promise();
+
   }
 
   async queryAllDepartments() {
+    console.log(this);
+
     const [rows] = await this.connection.query(queries.allDepartments);
+
     console.log(chalk.bgBlue("---ALL DEPARTMENTS---"));
     console.table(rows);
   }
@@ -42,6 +47,18 @@ class QueryDB {
   async addToDB(key, data) {
     await this.connection.query(queries[`add${key}`], data);
     console.log(chalk.bgGreen(`Added ${key} successfully!`))
+  }
+
+  async addDepartment(data) {
+    this.addToDB('Department', data);
+  }
+
+  async addRole(data) {
+    this.addToDB('Role', data);
+  }
+
+  async addEmployee(data) {
+    this.addToDB('Employee', data);
   }
 
   async updateEmployeeRole(data) {

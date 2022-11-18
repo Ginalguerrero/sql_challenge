@@ -1,60 +1,33 @@
 const inquirer = require("inquirer");
 const chalk = require("chalk");
-
+const queryDB = require("./db/QueryDB");
 
 async function menu() {
-  const {action} = await inquirer.createPromptModule({
-    name: "action",
-    message: "Select a operation: ",
-    type: list,
-    choices: [
-      "View departments",
-      "View roles",
-      "View employees",
-      inquirer.Separator(),
-      "Add department",
-      "Add role",
-      "Add employee",
-      inquirer.Separator(),
-      "Update employee role",
-      inquirer.Separator(),
-      "Exit"
-    ]
-  })
+  try {
+    const { action } = await inquirer.prompt({
+      name: "action",
+      message: "Select a operation: ",
+      type: "list",
+      choices: [
+        { name: "View departments", value: listDepartments},
+        { name: "View roles", value: queryDB.queryAllRoles },
+        { name: "View employees", value: queryDB.queryAllEmployees },
 
+        { name: "Add department", value: queryDB.addDepartment },
+        { name: "Add role", value: queryDB.addRole },
+        { name: "Add employee", value: queryDB.addEmployee },
+
+        { name: "Update employee role", value: queryDB.updateEmployeeRole },
+
+        { name: "Exit", value: process.exit },
+      ],
+    });
+    await action();
+    menu();
+  } catch (err) {
+    console.log(chalk.bgRed(err));
+  }
 }
 
-console.log(chalk.magenta("EMPLOYEE TRACKER"))
-
-
-
-
-
-function displayDepartments() {
-  console.log("Not IMPLEMENTED");
-}
-
-function displayRoles() {
-  console.log("Not IMPLEMENTED");
-}
-
-function displayEmployees() {
-  console.log("Not IMPLEMENTED");
-}
-
-function addDepartment() {
-  console.log("Not IMPLEMENTED");
-}
-
-function addRole() {
-  console.log("Not IMPLEMENTED");
-}
-
-function addEmployee() {
-  console.log("Not IMPLEMENTED");
-}
-
-function editEmployeeRole() {
-  console.log("Not IMPLEMENTED");
-}
-getOperation();
+console.log(chalk.magenta("EMPLOYEE TRACKER"));
+menu();
