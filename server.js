@@ -9,7 +9,7 @@ async function menu() {
       message: "Select a operation: ",
       type: "list",
       choices: [
-        { name: "View departments", value: listDepartments},
+        { name: "View departments", value: listDepartments },
         { name: "View roles", value: listRoles },
         { name: "View employees", value: listEmployees },
 
@@ -19,8 +19,8 @@ async function menu() {
 
         { name: "Update employee role", value: updateEmployeeRole },
 
-        { name: "Exit", value: process.exit },
-      ],
+        { name: "Exit", value: process.exit }
+      ]
     });
     await action();
     menu();
@@ -33,69 +33,78 @@ async function listDepartments() {
   await queryDB.queryAllDepartments();
 }
 
-
 async function listRoles() {
   await queryDB.queryAllRoles();
 }
 
 async function listEmployees() {
-  await queryDB.queryAllEmployees()
+  await queryDB.queryAllEmployees();
 }
 
 async function addDepartment() {
-  const  data = await inquirer.prompt({
+  const data = await inquirer.prompt({
     name: "name",
     message: "Enter the department name: ",
-    validate: () => answer?.trim() ? true: "Enter something..."
-  })
-  await queryDB.addDepartment(data);
+    validate: answer => (answer?.trim() ? true : "Enter something...")
+  });
+  console.log(data);
+  await queryDB.addDepartment([data.name]);
 }
 
 async function addRole() {
-  const data = await inquirer.prompt([{
-    name: "title",
-    message: "Enter the role title: ",
-    validate: () => answer?.trim() ? true: "Enter something..."
-  },
-  {
-    name: "salary",
-    message: "Enter the role salary: ",
-    validate: () => answer?.trim() ? true: "Enter something..."
-  },{
-    name: "department_id",
-    message: "Enter the role department_id: ",
-    validate: () => answer?.trim() ? true: "Enter something..."
-  },
-])
-  await queryDB.addRole(data)
+  const data = await inquirer.prompt([
+    {
+      name: "title",
+      message: "Enter the role title: ",
+      validate: answer => (answer?.trim() ? true : "Enter something...")
+    },
+    {
+      name: "salary",
+      message: "Enter the role salary: ",
+      validate: answer => (answer?.trim() ? true : "Enter something...")
+    },
+    {
+      name: "department_id",
+      message: "Enter the role department_id: ",
+      validate: answer => (answer?.trim() ? true : "Enter something...")
+    }
+  ]);
+  await queryDB.addRole([data.title, Number(data.salary), Number(data.department_id)]);
 }
 
 async function addEmployee() {
-  const data = await inquirer.prompt([{
-    name: "first_name",
-    message: "Enter the employee first name: ",
-    validate: () => answer?.trim() ? true: "Enter something..."
-  },
-  {
-    name: "last_name",
-    message: "Enter the employee last name: ",
-    validate: () => answer?.trim() ? true: "Enter something..."
-  },{
-    name: "role_id",
-    message: "Enter the employee role id: ",
-    validate: () => answer?.trim() ? true: "Enter something..."
-  }, {
-    name: "manager_id",
-    message: "Enter the emplotee manager id"
-  }
-])
+  const data = await inquirer.prompt([
+    {
+      name: "first_name",
+      message: "Enter the employee first name: ",
+      validate: answer => (answer?.trim() ? true : "Enter something...")
+    },
+    {
+      name: "last_name",
+      message: "Enter the employee last name: ",
+      validate: answer => (answer?.trim() ? true : "Enter something...")
+    },
+    {
+      name: "role_id",
+      message: "Enter the employee role id: ",
+      validate: answe => (answer?.trim() ? true : "Enter something...")
+    },
+    {
+      name: "manager_id",
+      message: "Enter the emplotee manager id"
+    }
+  ]);
 
-  await queryDB.addEmployee(data)
+  await queryDB.addEmployee([
+    data.first_name,
+    data.last_name,
+    Number(data.role_id),
+    Number(data.manager_id)
+  ]);
 }
 
-
-function updateEmployeeRole(){
-  const data = inquirer.prompt()
+function updateEmployeeRole() {
+  const data = inquirer.prompt();
 }
 console.log(chalk.magenta("EMPLOYEE TRACKER"));
 menu();
