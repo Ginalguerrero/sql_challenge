@@ -87,11 +87,11 @@ async function addEmployee() {
     {
       name: "role_id",
       message: "Enter the employee role id: ",
-      validate: answe => (answer?.trim() ? true : "Enter something...")
+      validate: answer => (answer?.trim() ? true : "Enter something...")
     },
     {
       name: "manager_id",
-      message: "Enter the emplotee manager id"
+      message: "Enter the employee manager id"
     }
   ]);
 
@@ -104,7 +104,14 @@ async function addEmployee() {
 }
 
 function updateEmployeeRole() {
-  const data = inquirer.prompt();
+  const data = inquirer.prompt([{
+    name: "role_id",
+    message: "What's the new role id?"
+  },
+  {
+    name: "id",
+    message:"What is the employee id?"
+  }]);
 }
 console.log(chalk.magenta("EMPLOYEE TRACKER"));
 menu();

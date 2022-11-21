@@ -23,8 +23,6 @@ class QueryDB {
   }
 
   async queryAllDepartments() {
-    console.log(this);
-
     const [rows] = await this.connection.query(queries.allDepartments);
 
     console.log(chalk.bgBlue("---ALL DEPARTMENTS---"));
