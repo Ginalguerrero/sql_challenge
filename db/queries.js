@@ -14,7 +14,7 @@ const queries = {
            rol.title role,
            dep.name department,
            rol.salary,
-           COALESCE(CONCAT(man.first_name, ' ', man.last_name), '') manager
+           CONCAT(man.first_name, ' ', man.last_name) manager
     FROM employees emp
     LEFT JOIN roles rol on emp.role_id = rol.id
     LEFT JOIN departments dep on rol.department_id = dep.id

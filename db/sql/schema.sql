@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS store_db;
+DROP DATABASE IF EXISTS store2_db;
 
-CREATE DATABASE store_db;
+CREATE DATABASE store2_db;
 
-USE store_db;
+USE store2_db;
 
 CREATE TABLE departments (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

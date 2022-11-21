@@ -103,8 +103,8 @@ async function addEmployee() {
   ]);
 }
 
-function updateEmployeeRole() {
-  const data = inquirer.prompt([{
+async function updateEmployeeRole() {
+  const data = await inquirer.prompt([{
     name: "role_id",
     message: "What's the new role id?"
   },
@@ -112,6 +112,8 @@ function updateEmployeeRole() {
     name: "id",
     message:"What is the employee id?"
   }]);
+
+  await queryDB.updateEmployeeRole([Number(data.role_id), Number(data.id)])
 }
 console.log(chalk.magenta("EMPLOYEE TRACKER"));
 menu();
