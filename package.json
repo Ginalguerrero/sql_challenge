@@ -1,0 +1,31 @@
+{
+  "name": "sql_challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ginalguerrero/sql_challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ginalguerrero/sql_challenge/issues"
+  },
+  "homepage": "https://github.com/Ginalguerrero/sql_challenge#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "inquirer": "^6.3.1",
+    "console.table": "^0.10.0",
+    "dotenv": "^16.0.3",
+    "mysql2": "^2.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
