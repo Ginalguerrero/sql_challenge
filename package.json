@@ -23,7 +23,7 @@
     "inquirer": "^6.3.1",
     "console.table": "^0.10.0",
     "dotenv": "^16.0.3",
-    "mysql2": "^2.3.3"
+    "mysql2": "^3.9.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
